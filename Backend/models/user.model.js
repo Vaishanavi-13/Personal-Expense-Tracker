@@ -28,6 +28,10 @@ const userSchema = new Schema(
 //     { expiresIn: ... }               // 3. Options
 // )
 
+const isPasswordMatch = (password) =>{
+    return bcrypt.compareSync(password, this.password);
+}
+
 const generateAccessToken = function(){
     return jwt.sign(
         {
@@ -56,3 +60,4 @@ const generateRefreshToken = function(){
 }
 
 export const user = mongoose.model("User", userSchema);
+export {isPasswordMatch, generateAccessToken, generateRefreshToken};
